@@ -136,31 +136,31 @@ body {
   opacity: 1;
 }
 
-/* Кнопка */
+/* Синяя кнопка */
 .feedback-link {
   display: inline-block;
   margin: 40px auto 60px;
-  background: #ffffff;
-  color: #377ceb;
+  background: #377ceb; /* синий фон */
+  color: #ffffff; /* белый текст */
   padding: 18px 30px;
   border-radius: 15px;
   font-size: 1.2em;
   font-weight: 700;
   text-decoration: none;
   box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   animation: pulse 2s infinite ease-in-out;
+}
+.feedback-link:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 22px rgba(0,0,0,0.25);
+  background: #2554a6; /* темный синий при наведении */
 }
 @keyframes pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
-.feedback-link:hover {
-  transform: scale(1.1);
-  box-shadow: 0 12px 22px rgba(0,0,0,0.25);
-}
-
 </style>
 </head>
 <body>
@@ -173,13 +173,13 @@ body {
 </header>
 
 <div class="label">
-  Это место для тех, кто живёт в движении, выбирает вкусы, свободу и комьюнити по вайбу
+  Это место для тех, кто живёт в движении, выбирает вкусы, свободу и комьюнити по вайбу.
 </div>
 
 <main>
 
 <!-- Карусель 1: видео -->
-<div class="label">замени кофе-попробуй энергию чая</div>
+<div class="label">новый ритуал, который работает лучше</div>
 <div class="carousel-container">
   <div class="carousel-track">
     <div class="carousel-slide"><video autoplay muted playsinline loop src="video1.mp4"></video></div>
@@ -227,7 +227,7 @@ body {
   </div>
 </div>
 
-<!-- Кнопка в конец -->
+<!-- Синяя кнопка в конец -->
 <a class="feedback-link" href="https://t.me/your_link" target="_blank">
   Жалобы и предложения
 </a>

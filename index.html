@@ -69,24 +69,7 @@ body {
   box-shadow: 0 8px 18px rgba(0,0,0,0.15);
 }
 
-/* Секции картинок */
-.menu-section {
-  margin: 30px auto 40px;
-  width: 90%;
-  max-width: 700px;
-}
-.menu-image {
-  width: 100%;
-  border-radius: 20px;
-  box-shadow: 0 12px 26px rgba(0,0,0,0.25);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.menu-image:hover {
-  transform: scale(1.03);
-  box-shadow: 0 16px 30px rgba(0,0,0,0.3);
-}
-
-/* Видео карусель */
+/* Карусели */
 .carousel-container {
   position: relative;
   width: 90%;
@@ -107,7 +90,7 @@ body {
   box-sizing: border-box;
 }
 
-.carousel-slide video {
+.carousel-slide img, .carousel-slide video {
   width: 100%;
   border-radius: 20px;
 }
@@ -180,7 +163,6 @@ body {
 
 </style>
 </head>
-
 <body>
 
 <!-- Стикер -->
@@ -190,101 +172,106 @@ body {
   <img src="logo.png" alt="Логотип">
 </header>
 
-<!-- Текст под логотипом -->
 <div class="label">
   Это место для тех, кто живёт в движении, выбирает вкусы, свободу и комьюнити по вайбу.
 </div>
 
 <main>
 
-  <!-- 1 картинка -->
-  <div class="label">авторские напитки на основе натурального пюре и чая</div>
-  <section class="menu-section">
-    <img src="menu_drinks.png" class="menu-image" alt="Меню напитков">
-  </section>
-
-  <!-- 2 картинка -->
-  <div class="label">Сезонные напитки - для самой уютной осени</div>
-  <section class="menu-section">
-    <img src="menu_season.png" class="menu-image" alt="Меню сезонок">
-  </section>
-
-  <!-- 3 картинка -->
-  <div class="label">Выбери свой лучший завтрак</div>
-  <section class="menu-section">
-    <img src="food1.png" class="menu-image" alt="Меню еды 1">
-  </section>
-
-  <!-- 4 картинка -->
-  <div class="label">Выбери свой лучший завтрак</div>
-  <section class="menu-section">
-    <img src="food2.png" class="menu-image" alt="Меню еды 2">
-  </section>
-
-  <!-- Видео карусель -->
-  <div class="label">новый ритуал, который работает лучше</div>
-  <div class="carousel-container">
-    <div class="carousel-track">
-      <div class="carousel-slide"><video autoplay muted playsinline loop src="video1.mp4"></video></div>
-      <div class="carousel-slide"><video autoplay muted playsinline loop src="video2.mp4"></video></div>
-      <div class="carousel-slide"><video autoplay muted playsinline loop src="video3.mp4"></video></div>
-      <div class="carousel-slide"><video autoplay muted playsinline loop src="video4.mp4"></video></div>
-    </div>
-    <button class="carousel-button prev">&#10094;</button>
-    <button class="carousel-button next">&#10095;</button>
-    <div class="carousel-dots">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
+<!-- Карусель 1: видео -->
+<div class="label">новый ритуал, который работает лучше</div>
+<div class="carousel-container">
+  <div class="carousel-track">
+    <div class="carousel-slide"><video autoplay muted playsinline loop src="video1.mp4"></video></div>
+    <div class="carousel-slide"><video autoplay muted playsinline loop src="video2.mp4"></video></div>
+    <div class="carousel-slide"><video autoplay muted playsinline loop src="video3.mp4"></video></div>
+    <div class="carousel-slide"><video autoplay muted playsinline loop src="video4.mp4"></video></div>
   </div>
+  <button class="carousel-button prev">&#10094;</button>
+  <button class="carousel-button next">&#10095;</button>
+  <div class="carousel-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</div>
 
-  <!-- Кнопка в самый конец -->
-  <a class="feedback-link" href="https://t.me/your_link" target="_blank">
-    Жалобы и предложения
-  </a>
+<!-- Карусель 2: напитки + сезонные -->
+<div class="label">Меню напитков и сезонок</div>
+<div class="carousel-container">
+  <div class="carousel-track">
+    <div class="carousel-slide"><img src="menu_drinks.png" alt="Меню напитков"></div>
+    <div class="carousel-slide"><img src="menu_season.png" alt="Сезонные напитки"></div>
+  </div>
+  <button class="carousel-button prev">&#10094;</button>
+  <button class="carousel-button next">&#10095;</button>
+  <div class="carousel-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+  </div>
+</div>
+
+<!-- Карусель 3: еда -->
+<div class="label">Выбери свой лучший завтрак</div>
+<div class="carousel-container">
+  <div class="carousel-track">
+    <div class="carousel-slide"><img src="food1.png" alt="Меню еды 1"></div>
+    <div class="carousel-slide"><img src="food2.png" alt="Меню еды 2"></div>
+  </div>
+  <button class="carousel-button prev">&#10094;</button>
+  <button class="carousel-button next">&#10095;</button>
+  <div class="carousel-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+  </div>
+</div>
+
+<!-- Кнопка в конец -->
+<a class="feedback-link" href="https://t.me/your_link" target="_blank">
+  Жалобы и предложения
+</a>
 
 </main>
 
 <script>
-// Карусель
-const track = document.querySelector('.carousel-track');
-const slides = Array.from(track.children);
-const nextButton = document.querySelector('.next');
-const prevButton = document.querySelector('.prev');
-const dots = Array.from(document.querySelectorAll('.dot'));
+function initCarousel(carouselContainer) {
+  const track = carouselContainer.querySelector('.carousel-track');
+  const slides = Array.from(track.children);
+  const nextButton = carouselContainer.querySelector('.next');
+  const prevButton = carouselContainer.querySelector('.prev');
+  const dots = Array.from(carouselContainer.querySelectorAll('.dot'));
+  let currentIndex = 0;
 
-let currentIndex = 0;
+  function updateCarousel() {
+    track.style.transform = 'translateX(-' + currentIndex * 100 + '%)';
+    dots.forEach((dot, idx) => dot.classList.toggle('active', idx === currentIndex));
+  }
 
-function updateCarousel() {
-  track.style.transform = 'translateX(-' + currentIndex * 100 + '%)';
-  dots.forEach((dot, idx) => dot.classList.toggle('active', idx === currentIndex));
-}
-
-// Клики на стрелки
-nextButton.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % slides.length;
-  updateCarousel();
-});
-prevButton.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-  updateCarousel();
-});
-
-// Клики на точки
-dots.forEach((dot, idx) => {
-  dot.addEventListener('click', () => {
-    currentIndex = idx;
+  nextButton.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % slides.length;
     updateCarousel();
   });
-});
+  prevButton.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateCarousel();
+  });
 
-// Авто-листание каждые 5 секунд
-setInterval(() => {
-  currentIndex = (currentIndex + 1) % slides.length;
-  updateCarousel();
-}, 5000);
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      currentIndex = idx;
+      updateCarousel();
+    });
+  });
+
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateCarousel();
+  }, 5000);
+}
+
+// Инициализация всех каруселей на странице
+document.querySelectorAll('.carousel-container').forEach(initCarousel);
 </script>
 
 </body>

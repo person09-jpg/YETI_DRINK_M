@@ -1,196 +1,291 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Меню</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Меню и видео</title>
 
-  <style>
-    /* Подключаем ZingRust */
-    @font-face {
-      font-family: "ZingRust";
-      src: url("ZingRust.ttf");
-    }
+<style>
+/* Подключаем шрифт */
+@font-face {
+  font-family: "ZingRust";
+  src: url("ZingRust.ttf");
+}
 
-    /* Анимация появления всей страницы */
-    body {
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      color: #377ceb;
-      font-family: Arial, Helvetica, sans-serif;
+/* Живой градиент фона */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: #377ceb;
+  background: linear-gradient(90deg, #ff8abf, #ffffff, #ff8abf);
+  background-size: 300% 300%;
+  animation: gradientMove 12s ease infinite, fadeInPage 1.2s ease forwards;
+  opacity: 0;
+}
 
-      opacity: 0;
-      animation: fadeInPage 1.2s ease forwards;
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-      /* Живой градиент */
-      background: linear-gradient(90deg, #ff8abf, #ffffff, #ff8abf);
-      background-size: 300% 300%;
-      animation: gradientMove 12s ease infinite, fadeInPage 1.2s ease forwards;
-    }
+@keyframes fadeInPage {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
-    @keyframes fadeInPage {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+/* Стикер */
+.sticker {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 90px;
+  z-index: 1000;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.25));
+  animation: spin 8s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+/* Заголовок и логотип */
+.header { padding: 25px 10px; }
+.header img { max-width: 180px; width: 60%; }
 
-    /* Стикер */
-    .sticker {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      width: 90px;
-      z-index: 1000;
-      filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.25));
-      animation: spin 8s linear infinite;
-    }
+/* Плашки текста */
+.label {
+  font-family: "ZingRust", sans-serif;
+  background: white;
+  color: #377ceb;
+  font-size: 1.3em;
+  padding: 18px;
+  border-radius: 18px;
+  margin: 25px auto 10px;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
 
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+/* Секции картинок */
+.menu-section {
+  margin: 30px auto 40px;
+  width: 90%;
+  max-width: 700px;
+}
+.menu-image {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 12px 26px rgba(0,0,0,0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.menu-image:hover {
+  transform: scale(1.03);
+  box-shadow: 0 16px 30px rgba(0,0,0,0.3);
+}
 
-    .header {
-      padding: 25px 10px;
-      animation: fadeUp 1.2s ease forwards;
-    }
+/* Видео карусель */
+.carousel-container {
+  position: relative;
+  width: 90%;
+  max-width: 700px;
+  margin: 40px auto;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 12px 26px rgba(0,0,0,0.25);
+}
 
-    .header img {
-      max-width: 180px;
-      width: 60%;
-    }
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
 
-    /* Плашки текста */
-    .label {
-      font-family: "ZingRust", sans-serif;
-      background: white;
-      color: #377ceb;
-      font-size: 1.3em;
-      padding: 18px;
-      border-radius: 18px;
-      margin: 25px auto 10px;
-      width: 90%;
-      max-width: 700px;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+.carousel-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
 
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s ease forwards;
-    }
+.carousel-slide video {
+  width: 100%;
+  border-radius: 20px;
+}
 
-    /* Анимация появления элементов */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+/* Стрелки */
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.8);
+  border: none;
+  font-size: 2em;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #377ceb;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+.carousel-button:hover {
+  background: #ffffff;
+}
+.prev { left: 10px; }
+.next { right: 10px; }
 
-    .menu-section {
-      margin: 30px auto 40px;
-      width: 90%;
-      max-width: 700px;
+/* Точки навигации */
+.carousel-dots {
+  text-align: center;
+  margin-top: 15px;
+}
+.carousel-dots span {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 0 5px;
+  background: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+.carousel-dots .active {
+  opacity: 1;
+}
 
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s ease forwards;
-    }
+/* Кнопка */
+.feedback-link {
+  display: inline-block;
+  margin: 40px auto 60px;
+  background: #ffffff;
+  color: #377ceb;
+  padding: 18px 30px;
+  border-radius: 15px;
+  font-size: 1.2em;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: pulse 2s infinite ease-in-out;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+.feedback-link:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 22px rgba(0,0,0,0.25);
+}
 
-    .menu-image {
-      width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 12px 26px rgba(0,0,0,0.25);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    /* Лёгкое увеличение картинки */
-    .menu-image:hover {
-      transform: scale(1.03);
-      box-shadow: 0 16px 30px rgba(0,0,0,0.3);
-    }
-
-    /* Кнопка */
-    .feedback-link {
-      display: inline-block;
-      margin: 40px auto 60px;
-      background: #ffffff;
-      color: #377ceb;
-      padding: 18px 30px;
-      border-radius: 15px;
-      font-size: 1.2em;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-
-      /* Пульсация */
-      animation: pulse 2s infinite ease-in-out;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    .feedback-link:hover {
-      transform: scale(1.1);
-      box-shadow: 0 12px 22px rgba(0,0,0,0.25);
-    }
-
-  </style>
+</style>
 </head>
 
 <body>
 
-  <!-- Стикер -->
-  <img src="sticker.png" class="sticker" alt="sticker">
+<!-- Стикер -->
+<img src="sticker.png" class="sticker" alt="sticker">
 
-  <header class="header">
-    <img src="logo.png" alt="Логотип">
-  </header>
+<header class="header">
+  <img src="logo.png" alt="Логотип">
+</header>
 
-  <!-- Текст под логотипом -->
-  <div class="label" style="margin-top: -10px;">
-    Это место для тех, кто живёт в движении, выбирает вкусы, свободу и комьюнити по вайбу.
+<!-- Текст под логотипом -->
+<div class="label">
+  Это место для тех, кто живёт в движении, выбирает вкусы, свободу и комьюнити по вайбу.
+</div>
+
+<main>
+
+  <!-- 1 картинка -->
+  <div class="label">авторские напитки на основе натурального пюре и чая</div>
+  <section class="menu-section">
+    <img src="menu_drinks.png" class="menu-image" alt="Меню напитков">
+  </section>
+
+  <!-- 2 картинка -->
+  <div class="label">Сезонные напитки - для самой уютной осени</div>
+  <section class="menu-section">
+    <img src="menu_season.png" class="menu-image" alt="Меню сезонок">
+  </section>
+
+  <!-- 3 картинка -->
+  <div class="label">Выбери свой лучший завтрак</div>
+  <section class="menu-section">
+    <img src="food1.png" class="menu-image" alt="Меню еды 1">
+  </section>
+
+  <!-- 4 картинка -->
+  <div class="label">Выбери свой лучший завтрак</div>
+  <section class="menu-section">
+    <img src="food2.png" class="menu-image" alt="Меню еды 2">
+  </section>
+
+  <!-- Видео карусель -->
+  <div class="label">новый ритуал, который работает лучше</div>
+  <div class="carousel-container">
+    <div class="carousel-track">
+      <div class="carousel-slide"><video autoplay muted playsinline loop src="video1.mp4"></video></div>
+      <div class="carousel-slide"><video autoplay muted playsinline loop src="video2.mp4"></video></div>
+      <div class="carousel-slide"><video autoplay muted playsinline loop src="video3.mp4"></video></div>
+      <div class="carousel-slide"><video autoplay muted playsinline loop src="video4.mp4"></video></div>
+    </div>
+    <button class="carousel-button prev">&#10094;</button>
+    <button class="carousel-button next">&#10095;</button>
+    <div class="carousel-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
   </div>
 
-  <main>
+  <!-- Кнопка в самый конец -->
+  <a class="feedback-link" href="https://t.me/your_link" target="_blank">
+    Жалобы и предложения
+  </a>
 
-    <!-- 1 картинка -->
-    <div class="label">авторские напитки на основе натурального пюре и чая</div>
-    <section class="menu-section">
-      <img src="menu_drinks.png" class="menu-image" alt="Меню напитков">
-    </section>
+</main>
 
-    <!-- 2 картинка -->
-    <div class="label">Сезонные напитки - для самой уютной осени</div>
-    <section class="menu-section">
-      <img src="menu_season.png" class="menu-image" alt="Меню сезонок">
-    </section>
+<script>
+// Карусель
+const track = document.querySelector('.carousel-track');
+const slides = Array.from(track.children);
+const nextButton = document.querySelector('.next');
+const prevButton = document.querySelector('.prev');
+const dots = Array.from(document.querySelectorAll('.dot'));
 
-    <!-- 3 картинка -->
-    <div class="label">Выбери свой лучший завтрак</div>
-    <section class="menu-section">
-      <img src="food1.png" class="menu-image" alt="Меню еды 1">
-    </section>
+let currentIndex = 0;
 
-    <!-- 4 картинка -->
-    <div class="label">Выбери свой лучший завтрак</div>
-    <section class="menu-section">
-      <img src="food2.png" class="menu-image" alt="Меню еды 2">
-    </section>
+function updateCarousel() {
+  track.style.transform = 'translateX(-' + currentIndex * 100 + '%)';
+  dots.forEach((dot, idx) => dot.classList.toggle('active', idx === currentIndex));
+}
 
-    <!-- Кнопка -->
-    <a class="feedback-link" href="https://t.me/your_link" target="_blank">
-      Жалобы и предложения
-    </a>
+// Клики на стрелки
+nextButton.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % slides.length;
+  updateCarousel();
+});
+prevButton.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+  updateCarousel();
+});
 
-  </main>
+// Клики на точки
+dots.forEach((dot, idx) => {
+  dot.addEventListener('click', () => {
+    currentIndex = idx;
+    updateCarousel();
+  });
+});
+
+// Авто-листание каждые 5 секунд
+setInterval(() => {
+  currentIndex = (currentIndex + 1) % slides.length;
+  updateCarousel();
+}, 5000);
+</script>
 
 </body>
 </html>
